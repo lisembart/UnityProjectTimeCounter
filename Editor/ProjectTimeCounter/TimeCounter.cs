@@ -28,20 +28,27 @@ public class TimeCounter
             }
         }
 
-        TimeSpan projectTIme;
-        foreach (TimeSpan session in sessions)
-        {
-            projectTIme += session;
-        }
-        Debug.Log("Total time: " + projectTIme);
+        Debug.Log("Total project time: " + GetTotalProjectTime());
 
-        EditorApplication.update += Update;
         EditorApplication.wantsToQuit += OnQuit;
     }
 
-    public static void Update()
+    public static TimeSpan GetTotalProjectTime()
     {
-        
+        TimeSpan totalTime;
+        foreach (TimeSpan session in sessions)
+        {
+            totalTime += session;
+        }
+
+        return totalTime;
+    }
+
+    public static TimeSpan GetCurrentSessionTime()
+    {
+        DateTime nowTime = DateTime.Now;
+        TimeSpan sessionTime = (nowTime - startTime);
+        return sessionTime;
     }
 
     public static bool OnQuit()
