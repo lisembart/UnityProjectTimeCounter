@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
-using System.Xml.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
 [InitializeOnLoad]
@@ -12,7 +10,7 @@ public class TimeCounter
 {
     private static DateTime startTime;
     private static List<TimeSpan> sessions = new List<TimeSpan>();
-    private static string saveFilePath = @"D:\sessions.dat";
+    private static string saveFilePath = Application.dataPath + "/Editor/ProjectTimeCounter/total_project_time.dat";
 
     static TimeCounter()
     {
