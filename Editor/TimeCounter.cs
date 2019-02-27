@@ -5,13 +5,14 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System.Xml.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 [InitializeOnLoad]
 public class TimeCounter
 {
     private static DateTime startTime;
     private static List<TimeSpan> sessions = new List<TimeSpan>();
-    private static string saveFilePath = @"D:\sessions.xml";
+    private static string saveFilePath = @"D:\sessions.dat";
 
     static TimeCounter()
     {
@@ -20,17 +21,19 @@ public class TimeCounter
 
         if (File.Exists(saveFilePath))
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<TimeSpan>));
-            using (StreamReader reader = new StreamReader(File.OpenRead(saveFilePath)))
+            BinaryFormatter bf = new BinaryFormatter();
+            using (FileStream reader = new FileStream(saveFilePath, FileMode.Open))
             {
-                sessions = (List<TimeSpan>) serializer.Deserialize(reader);
+                sessions = (List<TimeSpan>) bf.Deserialize(reader);
             }
         }
 
+        TimeSpan projectTIme;
         foreach (TimeSpan session in sessions)
         {
-            Debug.Log("Session: " + session);
+            projectTIme += session;
         }
+        Debug.Log("Total time: " + projectTIme);
 
         EditorApplication.update += Update;
         EditorApplication.wantsToQuit += OnQuit;
@@ -55,19 +58,16 @@ public class TimeCounter
         Debug.Log("Total time: " + projectTIme);
 
         bool serialized = false;
-        XmlSerializer serializer = new XmlSerializer(typeof(List<TimeSpan>));
-        using (FileStream fileStream = new FileStream(saveFilePath, FileMode.Create))
+
+        BinaryFormatter bf = new BinaryFormatter();
+
+        using (FileStream writer = new FileStream(saveFilePath, FileMode.Create))
         {
-            serializer.Serialize(fileStream, sessions);
+            bf.Serialize(writer, sessions);
             serialized = true;
         }
 
-        foreach (TimeSpan session in sessions)
-        {
-            Debug.Log("Sessions at end: " + session);
-        }
-
-        return false;
+        return serialized;
     }
 
 
