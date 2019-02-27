@@ -13,7 +13,7 @@ public class TimeCounterWindow : EditorWindow
 
     void OnGUI()
     {
-        GUILayout.Label("Total project time (without current session): " + TimeCounter.GetTotalProjectTime());
-        GUILayout.Label("Current session time: " + TimeCounter.GetCurrentSessionTime());
+        GUILayout.Label("Total project time (without current session): " + TimeCounter.GetFormattedTime(TimeCounter.GetTotalProjectTime()));
+        GUILayout.Label("Current session time: " + TimeCounter.GetFormattedTime(TimeCounter.GetCurrentSessionTime()));
     }
 }

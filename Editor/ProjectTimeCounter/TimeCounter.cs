@@ -17,7 +17,6 @@ public class TimeCounter
     static TimeCounter()
     {
         startTime = DateTime.Now;
-        UnityEngine.Debug.Log("Current time " + startTime);
 
         if (File.Exists(saveFilePath))
         {
@@ -28,7 +27,7 @@ public class TimeCounter
             }
         }
 
-        Debug.Log("Total project time: " + GetTotalProjectTime());
+        Debug.Log("Total project time: " + GetFormattedTime(GetTotalProjectTime()));
 
         EditorApplication.wantsToQuit += OnQuit;
     }
@@ -51,18 +50,15 @@ public class TimeCounter
         return sessionTime;
     }
 
+    public static string GetFormattedTime(TimeSpan time)
+    {
+        return string.Format("{0}h/{1}m/{2}s", time.Hours, time.Minutes, time.Seconds);
+    }
+
     public static bool OnQuit()
     {
-        DateTime nowTime = DateTime.Now;
-        TimeSpan sessionTime = (nowTime - startTime);
+        TimeSpan sessionTime = GetCurrentSessionTime();
         sessions.Add(sessionTime);
-        Debug.Log("Unity quiting, session time: " + sessionTime);
-        TimeSpan projectTIme;
-        foreach (TimeSpan session in sessions)
-        {
-            projectTIme += session;
-        }
-        Debug.Log("Total time: " + projectTIme);
 
         bool serialized = false;
 
