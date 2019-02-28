@@ -17,3 +17,4 @@ Each time you start the project, the console will display information about the 
 ![Screenshot__2](Screenshot__2.png)
 
 ## Download links
+https://github.com/lisembart/UnityProjectTimeCounter/releases/download/1.0/UnityProjectTimeCounter.unitypackage
