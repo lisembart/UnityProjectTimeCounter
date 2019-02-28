@@ -12,8 +12,8 @@ Each time you start the project, the console will display information about the 
 
 ## Screenshots
 
-![screenshot1](C:\Users\lisem\Desktop\UnityProjectTimeCounter\screenshot1.png)
+![screenshot1](screenshot1.png)
 
-![Screenshot__2](C:\Users\lisem\Desktop\UnityProjectTimeCounter\Screenshot__2.png)
+![Screenshot__2](Screenshot__2.png)
 
 ## Download links
