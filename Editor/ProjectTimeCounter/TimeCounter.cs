@@ -50,6 +50,10 @@ public class TimeCounter
 
     public static string GetFormattedTime(TimeSpan time)
     {
+        if (time.TotalHours > 24)
+        {
+            return string.Format("{0}d/{1}h/{2}m/{3}s", time.Days,time.Hours, time.Minutes, time.Seconds);
+        }
         return string.Format("{0}h/{1}m/{2}s", time.Hours, time.Minutes, time.Seconds);
     }
 
