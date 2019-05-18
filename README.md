@@ -1,6 +1,6 @@
 # Unity Project Time Counter
 
-When I use Unity, I often wonder how much time it took to do my projects. Unity Project Time Counter is a timer that measures time from the start and sums it up giving a preview of how much time we’ve spent with certain project.
+When I use Unity, I often wonder how much time it took to do my projects. Unity Project Time Counter measures gives you such preview. The data is serialized to a .dat file and the time of the current session and the total time can be previewed in the Unity editor in a special window.
 
 ## Setup
 
